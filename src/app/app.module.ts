@@ -9,6 +9,7 @@ import { DataDisplayComponent } from './data-display/data-display.component';
 import { FormComponent } from './form/form.component';
 import { FormsModule } from '@angular/forms';
 import { DataService } from './data.service';
+import { DataElementComponent } from './data-display/data-element/data-element.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { DataService } from './data.service';
     HomeComponent,
     HeaderComponent,
     DataDisplayComponent,
-    FormComponent
+    FormComponent,
+    DataElementComponent
   ],
   imports: [
     BrowserModule,

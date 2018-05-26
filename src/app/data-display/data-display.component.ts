@@ -1,15 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { DataService } from '../data.service';
+import { Data } from '../data.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-data-display',
   templateUrl: './data-display.component.html',
   styleUrls: ['./data-display.component.css']
 })
-export class DataDisplayComponent implements OnInit {
+export class DataDisplayComponent implements OnInit, OnDestroy {
+  data: Data[];
+  subscription: Subscription;
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    this.subscription = this.dataService.dataModified
+      .subscribe(
+        (data: Data[]) => {
+          this.data = data;
+        }
+      );
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

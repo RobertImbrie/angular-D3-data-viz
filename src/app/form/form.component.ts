@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-form',
@@ -21,12 +22,16 @@ export class FormComponent implements OnInit {
     'blue',
     'purple'
   ];
-  constructor( private router: Router ) { }
+  constructor(
+    private router: Router,
+    private dataService: DataService
+  ) { }
 
   ngOnInit() {
   }
 
   onSubmit() {
+    this.dataService.addData(this.dataForm.value);
     this.router.navigate(['data']);
   }
 
