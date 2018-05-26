@@ -19,8 +19,11 @@ export class DataDisplayComponent implements OnInit, OnDestroy {
       .subscribe(
         (data: Data[]) => {
           this.data = data;
+          console.log(data);
         }
       );
+
+    this.data = this.dataService.getAllData();
   }
 
   ngOnDestroy() {
