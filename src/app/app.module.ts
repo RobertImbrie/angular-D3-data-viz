@@ -7,6 +7,8 @@ import { HomeComponent } from './core/home/home.component';
 import { HeaderComponent } from './core/header/header.component';
 import { DataDisplayComponent } from './data-display/data-display.component';
 import { FormComponent } from './form/form.component';
+import { FormsModule } from '@angular/forms';
+import { DataService } from './data.service';
 
 @NgModule({
   declarations: [
@@ -18,9 +20,10 @@ import { FormComponent } from './form/form.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
