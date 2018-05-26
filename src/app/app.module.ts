@@ -26,7 +26,10 @@ import { DataElementComponent } from './data-display/data-element/data-element.c
     AppRoutingModule,
     FormsModule
   ],
-  providers: [DataService],
+  providers: [
+    DataService,
+    D3Service
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
