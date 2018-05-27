@@ -19,12 +19,20 @@ export class BarChartDirective implements OnInit {
     this.parentNativeElement = elementRef.nativeElement;
   }
 
-  ngOnInit(): void {
-    let d3 = this.d3;
-    let d3ParentElement: Selection<any, any, any, any>;
+  ngOnInit() {
+    // const d3 = this.d3;
+    // let d3ParentElement: Selection<any, any, any, any>;
+    // const x = d3.scaleLinear()
+    //   .domain([0, d3.max(this.data)])
+    //   .range([0, 420]);
 
-    if (this.parentNativeElement !== null) {
-      d3ParentElement = d3.select(this.parentNativeElement);
-    }
+    // if (this.parentNativeElement !== null) {
+    //   d3ParentElement = d3.select(this.parentNativeElement)
+    //     .selectAll('div')
+    //       .data(this.data)
+    //     .enter().append('div')
+    //       .style('width', function(d) { return x(d) + 'px'; })
+    //       .text(function(d) { return d; });
+    // }
   }
 }
