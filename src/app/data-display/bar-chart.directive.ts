@@ -28,26 +28,41 @@ export class BarChartDirective implements OnInit {
   }
 
   ngOnInit() {
-    const d3 = this.d3;
-    let d3ParentElement: Selection<any, any, any, any>;
-    console.log(this.data);
-    const x = d3.scaleLinear()
-      .domain([0, d3.max(this.data)])
+    let   d3ParentElement: Selection<any, any, any, any>;
+    const d3        = this.d3;
+    const barHeight = this.height / this.data.length - this.margin;
+    const x         = d3.scaleLinear()
+      .domain([0, d3.max(this.data,
+        function(d) { return d.value; })])
       .range([0, this.width]);
 
     if (this.parentNativeElement !== null) {
       d3ParentElement = d3.select(this.parentNativeElement)
-        .selectAll('div')
+        .selectAll('g')
           .data(this.data)
-        .enter().append('div')
-          .style('width', function(d) { return x(d.value) + 'px'; })
-          .style('height', (this.height / this.data.length - this.margin) + 'px')
-          .style('background-color', this.barColor)
-          .style('margin', this.margin + 'px')
-          .style('padding-right', '10px')
-          .style('color', this.textColor)
-          .style('text-align', 'right')
-          .text(function(d) { return d.value; });
+        .enter().append('g')
+          .attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; });
+
+      d3ParentElement.append('rect')
+        .attr('width', function(d) { console.log(x(20)); return x(d.value); })
+        .attr('height', barHeight);
+
+      d3ParentElement.append('text')
+        .attr('x', function(d) { return x(d.value) - 3; })
+        .attr('y', barHeight / 2)
+        .attr('dy', '.35em')
+        .text(function(d) { return d.value; });
+        // .selectAll('div')
+        //   .data(this.data)
+        // .enter().append('div')
+        //   .style('width', function(d) { return x(d.value) + 'px'; })
+        //   .style('height', (this.height / this.data.length - this.margin) + 'px')
+        //   .style('background-color', this.barColor)
+        //   .style('margin', this.margin + 'px')
+        //   .style('padding-right', '10px')
+        //   .style('color', this.textColor)
+        //   .style('text-align', 'right')
+        //   .text(function(d) { return d.value; });
     }
   }
 }
