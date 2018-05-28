@@ -3,10 +3,10 @@ import { Data } from '../data.model';
 import { D3Service, D3 } from 'd3-ng2-service';
 
 @Directive({
-  selector: '[appBarChart]'
+  selector: 'svg[appBarChart]'
 })
 export class BarChartDirective implements OnInit {
-  @Input() data: number[];
+  @Input() data: any[];
   @Input() height    = 200;
   @Input() width     = 200;
   @Input() barColor  = 'black';
@@ -30,7 +30,7 @@ export class BarChartDirective implements OnInit {
   ngOnInit() {
     const d3 = this.d3;
     let d3ParentElement: Selection<any, any, any, any>;
-    console.log(this.barColor);
+    console.log(this.data);
     const x = d3.scaleLinear()
       .domain([0, d3.max(this.data)])
       .range([0, this.width]);
@@ -40,14 +40,14 @@ export class BarChartDirective implements OnInit {
         .selectAll('div')
           .data(this.data)
         .enter().append('div')
-          .style('width', function(d) { return x(d) + 'px'; })
+          .style('width', function(d) { return x(d.value) + 'px'; })
           .style('height', (this.height / this.data.length - this.margin) + 'px')
           .style('background-color', this.barColor)
           .style('margin', this.margin + 'px')
           .style('padding-right', '10px')
           .style('color', this.textColor)
           .style('text-align', 'right')
-          .text(function(d) { return d; });
+          .text(function(d) { return d.value; });
     }
   }
 }

@@ -2,13 +2,13 @@
   *ngFor="let dataEl of data"
   [data]="dataEl"></app-data-element>
 
-<div
+<svg
   appBarChart
-  [data]="[10,20,30,40]"
+  [data]="[{color:'Blue', value:10},{color: 'Green', value: 20},{color:'Purple', value:30},{color: 'Red', value: 40}]"
   [height]=100
   [width]=500
   [barColor]="'lightblue'"
   [textColor]="'black'"
   [margin]=2
   [xAxis]="'Test'"
-  [yAxis]="'Test'"></div>
+  [yAxis]="'Test'"></svg>
