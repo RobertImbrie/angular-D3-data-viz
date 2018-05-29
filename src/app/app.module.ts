@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { DataService } from './data.service';
 import { DataElementComponent } from './data-display/data-element/data-element.component';
 import { BarChartDirective } from './data-display/bar-chart.directive';
+import { ColumnChartDirective } from './column-chart.directive';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { BarChartDirective } from './data-display/bar-chart.directive';
     DataDisplayComponent,
     FormComponent,
     DataElementComponent,
-    BarChartDirective
+    BarChartDirective,
+    ColumnChartDirective
   ],
   imports: [
     BrowserModule,
