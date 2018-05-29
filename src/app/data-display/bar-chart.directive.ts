@@ -30,6 +30,7 @@ export class BarChartDirective implements OnInit {
   ngOnInit() {
     let   d3ParentElement: Selection<any, any, any, any>;
     const d3        = this.d3;
+    const margin    = this.margin;
     const barHeight = this.height / this.data.length - this.margin;
     const x         = d3.scaleLinear()
       .domain([0, d3.max(this.data,
@@ -38,31 +39,24 @@ export class BarChartDirective implements OnInit {
 
     if (this.parentNativeElement !== null) {
       d3ParentElement = d3.select(this.parentNativeElement)
+        .attr('width', this.width)
+        .attr('height', this.height)
         .selectAll('g')
           .data(this.data)
         .enter().append('g')
-          .attr('transform', function(d, i) { return 'translate(0,' + i * barHeight + ')'; });
+          .attr('transform', function(d, i) { return 'translate(0,' + i * (barHeight + margin) + ')'; });
 
       d3ParentElement.append('rect')
-        .attr('width', function(d) { console.log(x(20)); return x(d.value); })
-        .attr('height', barHeight);
+        .attr('width', function(d) { return x(d.value); })
+        .attr('height', barHeight)
+        .attr('fill', this.barColor);
 
       d3ParentElement.append('text')
-        .attr('x', function(d) { return x(d.value) - 3; })
+        .attr('x', function(d) { return x(d.value) - 20; })
         .attr('y', barHeight / 2)
         .attr('dy', '.35em')
+        .attr('color', this.textColor)
         .text(function(d) { return d.value; });
-        // .selectAll('div')
-        //   .data(this.data)
-        // .enter().append('div')
-        //   .style('width', function(d) { return x(d.value) + 'px'; })
-        //   .style('height', (this.height / this.data.length - this.margin) + 'px')
-        //   .style('background-color', this.barColor)
-        //   .style('margin', this.margin + 'px')
-        //   .style('padding-right', '10px')
-        //   .style('color', this.textColor)
-        //   .style('text-align', 'right')
-        //   .text(function(d) { return d.value; });
     }
   }
 }
